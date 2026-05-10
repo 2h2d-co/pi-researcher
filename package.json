@@ -1,0 +1,38 @@
+{
+  "name": "pi-researcher",
+  "version": "0.0.1-alpha.0",
+  "description": "Pi package for web search, content retrieval and understanding",
+  "homepage": "https://github.com/2h2d-co/pi-researcher#readme",
+  "bugs": {
+    "url": "https://github.com/2h2d-co/pi-researcher/issues"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/2h2d-co/pi-researcher.git"
+  },
+  "license": "MIT",
+  "author": "Kaan Ozdokmeci",
+  "type": "module",
+  "files": ["extensions"],
+  "scripts": {
+    "check": "tsc -p tsconfig.json",
+    "test": "npm run check",
+    "release:publish": "npm run check && node ./scripts/publish.ts"
+  },
+  "pi": {
+    "extensions": ["./extensions"]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "dependencies": {
+
+  },
+  "devDependencies": {
+    "typescript": "^6",
+    "@types/node": "^24"
+  }
+}

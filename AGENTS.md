@@ -1,0 +1,1 @@
+- I don't want this Pi package to be discoverable at this point, so do not add or suggest adding `keywords: ["pi-package"]` to package.json
