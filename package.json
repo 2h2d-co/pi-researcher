@@ -6,33 +6,40 @@
   "bugs": {
     "url": "https://github.com/2h2d-co/pi-researcher/issues"
   },
-  "engines": {
-    "node": ">=24"
-  },
+  "license": "MIT",
+  "author": "Kaan Ozdokmeci",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/2h2d-co/pi-researcher.git"
   },
-  "license": "MIT",
-  "author": "Kaan Ozdokmeci",
+  "files": [
+    "extensions"
+  ],
   "type": "module",
-  "files": ["extensions"],
   "scripts": {
     "check": "tsc -p tsconfig.json",
     "test": "npm run check",
+    "fmt": "oxfmt",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "release:publish": "npm run check && node ./scripts/publish.ts"
   },
-  "pi": {
-    "extensions": ["./extensions"]
+  "devDependencies": {
+    "@types/node": "^24",
+    "oxfmt": "^0.48.0",
+    "oxlint": "^1.63.0",
+    "oxlint-tsgolint": "^0.22.1",
+    "typescript": "^6"
   },
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": "*"
   },
-  "dependencies": {
-
+  "engines": {
+    "node": ">=24"
   },
-  "devDependencies": {
-    "typescript": "^6",
-    "@types/node": "^24"
+  "pi": {
+    "extensions": [
+      "./extensions"
+    ]
   }
 }

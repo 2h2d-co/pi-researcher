@@ -15,8 +15,15 @@ const cliArgs = process.argv.slice(2);
 const execute = cliArgs.includes("--execute");
 const extraArgs = cliArgs.filter((arg) => arg !== "--execute");
 
-if (extraArgs.some((arg, index) => arg === "--tag" || arg.startsWith("--tag=") || (arg === "-t" && index < extraArgs.length - 1))) {
-  throw new Error("Do not pass --tag to release scripts; the dist-tag is derived from package.json version.");
+if (
+  extraArgs.some(
+    (arg, index) =>
+      arg === "--tag" || arg.startsWith("--tag=") || (arg === "-t" && index < extraArgs.length - 1),
+  )
+) {
+  throw new Error(
+    "Do not pass --tag to release scripts; the dist-tag is derived from package.json version.",
+  );
 }
 
 const prerelease = version.match(/-([0-9A-Za-z.-]+)$/)?.[1];
@@ -27,9 +34,11 @@ if (!execute) {
   publishArgs.push("--dry-run");
 }
 
-console.log(`${execute ? "Publishing" : "Dry-run publishing"} ${name}@${version} with npm dist-tag \"${tag}\"`);
+console.log(
+  `${execute ? "Publishing" : "Dry-run publishing"} ${name}@${version} with npm dist-tag "${tag}"`,
+);
 if (!execute) {
-  console.log('Pass --execute to perform the real npm publish.');
+  console.log("Pass --execute to perform the real npm publish.");
 }
 
 const result = spawnSync("npm", publishArgs, {
@@ -47,18 +56,18 @@ function deriveTag(prerelease: string, fullVersion: string) {
   const firstIdentifier = prerelease.split(".")[0]?.toLowerCase();
 
   if (!firstIdentifier) {
-    throw new Error(`Could not derive npm dist-tag from version \"${fullVersion}\"`);
+    throw new Error(`Could not derive npm dist-tag from version "${fullVersion}"`);
   }
 
   if (/^\d+$/.test(firstIdentifier)) {
     throw new Error(
-      `Version \"${fullVersion}\" has a numeric prerelease identifier. Use a named prerelease like alpha, beta, rc, or publish manually.`,
+      `Version "${fullVersion}" has a numeric prerelease identifier. Use a named prerelease like alpha, beta, rc, or publish manually.`,
     );
   }
 
   if (!/^[a-z][a-z0-9-]*$/.test(firstIdentifier)) {
     throw new Error(
-      `Derived npm dist-tag \"${firstIdentifier}\" from version \"${fullVersion}\" is invalid. Use a prerelease like alpha.0, beta.1, or rc.2.`,
+      `Derived npm dist-tag "${firstIdentifier}" from version "${fullVersion}" is invalid. Use a prerelease like alpha.0, beta.1, or rc.2.`,
     );
   }
 
