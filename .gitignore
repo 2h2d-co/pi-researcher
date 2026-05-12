@@ -1,8 +1,23 @@
+# Dependencies
 node_modules/
+
+# Build artifacts
 *.tsbuildinfo
 *.tgz
+
+# Package manager logs
 npm-debug.log*
+pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
+
+# OS files
 .DS_Store
+
+# Local Pi state
+.pi/
+
+# Markdown files
+*.md
+!README.md
+!AGENTS.md
