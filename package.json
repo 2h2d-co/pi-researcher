@@ -25,8 +25,7 @@
     "test": "npm run check",
     "fmt": "oxfmt",
     "lint": "oxlint",
-    "lint:fix": "oxlint --fix",
-    "release:publish": "npm run check && node ./scripts/publish.ts"
+    "lint:fix": "oxlint --fix"
   },
   "devDependencies": {
     "@types/node": "^24",
