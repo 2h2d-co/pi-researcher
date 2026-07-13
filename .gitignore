@@ -16,6 +16,7 @@ yarn-error.log*
 
 # Local Pi state
 .pi/
+mise.local.toml
 
 # Markdown files
 *.md
