@@ -24,7 +24,7 @@ The command sends a research-style prompt back into the session so Pi can invest
 
 ## Local development
 
-Typecheck the package:
+Run the repository-wide quality gate:
 
 ```bash
 npm run check
