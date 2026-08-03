@@ -38,4 +38,4 @@ This package currently publishes these project files explicitly:
 - `README.md`
 - `LICENSE`
 
-Stable and prerelease `v<version>` tags trigger the shared CI release flow. CI validates and tests the release before staging it on npm with provenance. Stable versions use `latest`; prereleases derive their npm dist-tag from the first prerelease identifier.
+Stable and prerelease `v<version>` tags trigger the shared CI release flow. CI validates and tests the release before staging it on npm with provenance. Stable versions use `latest`; prereleases derive their npm dist-tag from the first prerelease identifier. Release tags must be lightweight tags. Create one with `git tag v<version>`; do not use `git tag -a`, `git tag -s`, `git tag -m`, or `cog bump --annotated`.
