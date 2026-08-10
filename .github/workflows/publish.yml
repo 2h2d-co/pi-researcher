@@ -119,9 +119,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: npm-publish
     permissions:
-      attestations: write # Required to persist the package artifact attestation.
       contents: read
-      id-token: write # Required for attestation signing and npm trusted publishing.
+      id-token: write # Required for npm trusted publishing.
     steps:
       - name: Check out release commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -283,14 +282,6 @@ jobs:
             echo "version=$version"
           } >> "$GITHUB_OUTPUT"
 
-      - name: Attest package archive
-        if: ${{ !github.event.repository.private }}
-        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
-        with:
-          subject-path: |
-            ${{ env.archive }}
-            ${{ env.checksum }}
-
       - name: Stage package on npm
         id: stage
         shell: bash
@@ -305,7 +296,6 @@ jobs:
           stage_output=$(npm stage publish "$archive" \
             --tag "$NPM_DIST_TAG" \
             --access public \
-            --provenance \
             --json)
           stage_id=$(node -e '
             const chunks = [];
