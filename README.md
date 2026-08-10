@@ -38,4 +38,12 @@ This package currently publishes these project files explicitly:
 - `README.md`
 - `LICENSE`
 
-Stable and prerelease `v<version>` tags trigger the shared CI release flow. CI validates and tests the release before staging it on npm with provenance. Stable versions use `latest`; prereleases derive their npm dist-tag from the first prerelease identifier. Release tags must be lightweight tags. Create one with `git tag v<version>`; do not use `git tag -a`, `git tag -s`, `git tag -m`, or `cog bump --annotated`.
+Release flow:
+
+1. Run `npm run release -- X.Y.Z` from a clean, synchronized `main`.
+2. The command builds the exact package locally, records its SHA-256 in an SSH-signed release commit, proves a clean rebuild is reproducible, and creates a lightweight tag.
+3. Inspect the result, then push atomically with `git push --atomic origin main vX.Y.Z`.
+4. A read-only GitHub Actions job validates and packs the package. A separate GitHub-owned job verifies the signature and signed digest before attesting and staging that exact archive through npm trusted publishing.
+5. Approve the staged package on npmjs.com, or with `npm stage approve <stage-id>`.
+
+Stable releases use `latest`; prereleases derive their npm dist-tag from the first prerelease identifier.

@@ -22,6 +22,7 @@
   "type": "module",
   "scripts": {
     "check": "hk check --all --check",
+    "release": "node scripts/release.ts",
     "fmt": "oxfmt",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix"
