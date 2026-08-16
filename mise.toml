@@ -16,5 +16,5 @@ npm = "11.19.0"
 _.path = ["{{config_root}}/node_modules/.bin"]
 
 [shell_alias]
-"pi:local" = "command pi --no-extensions -e {{config_root}}"
-"pi:npm" = "command pi --no-extensions -e npm:pi-researcher"
+"pi:local" = "pi --no-extensions -e {{config_root}}"
+"pi:npm" = "pi --no-extensions -e npm:pi-researcher"
