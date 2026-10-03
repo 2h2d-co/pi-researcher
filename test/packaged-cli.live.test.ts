@@ -42,7 +42,7 @@ const instructions =
   "the exact file content and nothing else.";
 
 test(
-  "packaged /research sends a live research request through Pi 1.0.0",
+  "packaged /research sends a live research request through Pi 1.0.1",
   {
     skip: process.env["PI_RESEARCHER_LIVE_TEST"] !== "1",
     timeout: 240_000,
@@ -78,7 +78,7 @@ test(
         env: { ...process.env, ...env },
         encoding: "utf8",
       }).trim(),
-      "1.0.0",
+      "1.0.1",
     );
     await mkdir(env.PI_CODING_AGENT_DIR);
     await writeFile(
@@ -170,7 +170,7 @@ test(
     assert.equal(answer, marker);
     assert.doesNotMatch(client.getStderr(), /Failed to load extension|requires Pi/);
     t.diagnostic(
-      `Pi 1.0.0 ${model}: packed extension, usage notice, live research request, and built-in read passed`,
+      `Pi 1.0.1 ${model}: packed extension, usage notice, live research request, and built-in read passed`,
     );
   },
 );

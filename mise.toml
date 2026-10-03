@@ -25,7 +25,7 @@ description = "Run all non-writing project checks"
 run = ["npm run check", "npm test", "npm run pack:dry"]
 
 [tasks."test:live"]
-description = "Verify the packaged extension through Pi 1.0.0 and live Codex"
+description = "Verify the packaged extension through Pi 1.0.1 and live Codex"
 run = '''
 # Bind the token lookup and the test process to the repository's Pi dependency. The CLI
 # subprocess binds PI_PACKAGE_DIR to the selected executable itself.

@@ -2,8 +2,8 @@
 
 Minimal Pi package stub for research-oriented workflows.
 
-Requires Pi `>=1.0.0 <1.1.0`. Releases are validated against Pi 1.0.0. The
-extension refuses to load on a Pi older than 1.0.0, because Pi does not enforce
+Requires Pi `>=1.0.1 <1.1.0`. Releases are validated against Pi 1.0.1. The
+extension refuses to load on a Pi older than 1.0.1, because Pi does not enforce
 the package's peer range when it installs packages.
 
 **Pi's virtual models are not supported.** Releases are validated only with
@@ -39,7 +39,7 @@ mise run check
 
 It runs the hk quality gate, the offline tests, and a package dry run.
 
-The live test packs the extension, loads the archive into the Pi 1.0.0 CLI from
+The live test packs the extension, loads the archive into the Pi 1.0.1 CLI from
 `node_modules`, and sends a real `/research` request to `openai-codex`
 `gpt-5.6-luna`. It uses an isolated temporary Pi home and reads the bearer
 token from your existing `openai-codex` login:
@@ -49,7 +49,7 @@ mise run test:live
 ```
 
 Set `PI_PACKAGE_ARCHIVE` to test an existing archive instead of packing the
-worktree, or `PI_TEST_CLI_PATH` to the `dist/bundle/cli.js` of another Pi 1.0.0
+worktree, or `PI_TEST_CLI_PATH` to the `dist/bundle/cli.js` of another Pi 1.0.1
 installation.
 
 ## Packaging
