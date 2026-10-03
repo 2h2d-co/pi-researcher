@@ -2,6 +2,13 @@
 
 Minimal Pi package stub for research-oriented workflows.
 
+Requires Pi `>=1.0.0 <1.1.0`. Releases are validated against Pi 1.0.0. The
+extension refuses to load on a Pi older than 1.0.0, because Pi does not enforce
+the package's peer range when it installs packages.
+
+**Pi's virtual models are not supported.** Releases are validated only with
+physical models. Models registered with `pi.registerVirtualModel()` are untested.
+
 ## Included resources
 
 - `extensions/pi-researcher/index.ts` - registers the `/research` command
@@ -20,15 +27,30 @@ Example:
 /research compare Bun and Node.js runtime tradeoffs for CLI tools
 ```
 
-The command sends a research-style prompt back into the session so Pi can investigate the topic and summarize findings.
+The command sends a research-style prompt back into the session so Pi can investigate the topic and summarize findings. Without a topic, it shows usage and sends nothing.
 
 ## Local development
 
-Run the repository-wide quality gate:
+Run the complete non-writing validation:
 
 ```bash
-npm run check
+mise run check
 ```
+
+It runs the hk quality gate, the offline tests, and a package dry run.
+
+The live test packs the extension, loads the archive into the Pi 1.0.0 CLI from
+`node_modules`, and sends a real `/research` request to `openai-codex`
+`gpt-5.6-luna`. It uses an isolated temporary Pi home and reads the bearer
+token from your existing `openai-codex` login:
+
+```bash
+mise run test:live
+```
+
+Set `PI_PACKAGE_ARCHIVE` to test an existing archive instead of packing the
+worktree, or `PI_TEST_CLI_PATH` to the `dist/bundle/cli.js` of another Pi 1.0.0
+installation.
 
 ## Packaging
 
@@ -41,7 +63,7 @@ This package currently publishes these project files explicitly:
 Release flow:
 
 1. Run `npm run release -- X.Y.Z` from a clean, synchronized `main`.
-2. The command builds the exact package locally, records its SHA-256 in an SSH-signed release commit, proves a clean rebuild is reproducible, and creates a lightweight tag.
+2. The command builds the exact package locally, runs `mise run test:live` against that archive, records its SHA-256 in an SSH-signed release commit, proves a clean rebuild is reproducible, and creates a lightweight tag. A failed or unavailable live test stops the release before the commit.
 3. Inspect the result, then push atomically with `git push --atomic origin main vX.Y.Z`.
 4. A read-only GitHub Actions job validates and packs the package. A separate GitHub-owned job verifies the signature and signed digest before staging that exact archive through npm trusted publishing. GitHub artifact attestations and npm provenance are unavailable while the source repository is private, so the signed release commit remains the durable artifact-to-commit attestation.
 5. A final job creates the immutable GitHub release for the tag from the same verified archive, its

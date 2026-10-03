@@ -25,5 +25,5 @@
     "moduleDetection": "force",
     "skipLibCheck": true
   },
-  "include": ["extensions", "scripts", "oxlint.config.ts"]
+  "include": ["extensions", "scripts", "test", "oxlint.config.ts"]
 }

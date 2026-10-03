@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- **Breaking:** Require Pi 1.0.0. The peer range is now `>=1.0.0 <1.1.0`, and the extension
+  refuses to load on an older Pi with a message to restart on Pi 1.0.0 or later. Pi 0.84 is no
+  longer supported. `/research` behavior is unchanged.
 - Adopt the shared 2h2d Oxlint policy and exact supported Oxlint and Oxfmt versions.
 
 ### Security

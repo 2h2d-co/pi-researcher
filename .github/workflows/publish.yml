@@ -52,6 +52,9 @@ jobs:
       - name: Check
         run: npm run check
 
+      - name: Test
+        run: npm test
+
       - name: Pack package
         id: package
         shell: bash

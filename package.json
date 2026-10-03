@@ -22,6 +22,9 @@
   "type": "module",
   "scripts": {
     "check": "hk check --all --check",
+    "test": "PI_PACKAGE_DIR=\"$PWD/node_modules/@earendil-works/pi-coding-agent\" node --test --test-concurrency=1 test/*.test.ts",
+    "test:live": "PI_RESEARCHER_LIVE_TEST=1 node --test --test-concurrency=1 test/packaged-cli.live.test.ts",
+    "pack:dry": "npm pack --dry-run --ignore-scripts --allow-directory=all",
     "release": "node scripts/release.ts",
     "fmt": "oxfmt",
     "lint": "oxlint",
@@ -29,7 +32,7 @@
   },
   "devDependencies": {
     "@2h2d/oxlint-config": "0.1.2",
-    "@earendil-works/pi-coding-agent": "0.84.3",
+    "@earendil-works/pi-coding-agent": "1.0.0",
     "@types/node": "22.20.4",
     "oxfmt": "0.70.0",
     "oxlint": "1.85.0",
@@ -37,7 +40,7 @@
     "typescript": "7.0.2"
   },
   "peerDependencies": {
-    "@earendil-works/pi-coding-agent": ">=0.84.0 <0.85.0"
+    "@earendil-works/pi-coding-agent": ">=1.0.0 <1.1.0"
   },
   "engines": {
     "node": ">=22.19.0"

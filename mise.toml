@@ -22,4 +22,14 @@ _.path = ["{{config_root}}/node_modules/.bin"]
 
 [tasks.check]
 description = "Run all non-writing project checks"
-run = ["npm run check"]
+run = ["npm run check", "npm test", "npm run pack:dry"]
+
+[tasks."test:live"]
+description = "Verify the packaged extension through Pi 1.0.0 and live Codex"
+run = '''
+# Bind the token lookup and the test process to the repository's Pi dependency. The CLI
+# subprocess binds PI_PACKAGE_DIR to the selected executable itself.
+export PI_PACKAGE_DIR="$PWD/node_modules/@earendil-works/pi-coding-agent"
+PI_RESEARCHER_LIVE_API_KEY="$(./node_modules/.bin/pi auth print-bearer-token --provider openai-codex --model gpt-5.6-luna)" \
+  npm run test:live
+'''
