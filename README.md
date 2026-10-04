@@ -42,10 +42,11 @@ It runs the hk quality gate, the offline tests, and a package dry run.
 The live test packs the extension, loads the archive into the Pi CLI from
 `node_modules`, and sends a real `/research` request to `openai-codex`
 `gpt-5.6-luna`. It uses an isolated temporary Pi home and reads the bearer
-token from your existing `openai-codex` login:
+token from your existing `openai-codex` login through the repository Pi. Offline and live
+tests remove an inherited `PI_PACKAGE_DIR`, so Pi resolves its own package directory:
 
 ```bash
-mise run test:live
+npm run test:live
 ```
 
 Set `PI_PACKAGE_ARCHIVE` to test an existing archive instead of packing the
@@ -64,7 +65,7 @@ This package currently publishes these project files explicitly:
 Release flow:
 
 1. Run `npm run release -- X.Y.Z` from a clean, synchronized `main`.
-2. The command builds the exact package locally, runs `mise run test:live` against that archive, records its SHA-256 in an SSH-signed release commit, proves a clean rebuild is reproducible, and creates a lightweight tag. A failed or unavailable live test stops the release before the commit.
+2. The command builds the exact package locally, runs `npm run test:live` against that archive, records its SHA-256 in an SSH-signed release commit, proves a clean rebuild is reproducible, and creates a lightweight tag. A failed or unavailable live test stops the release before the commit.
 3. Inspect the result, then push atomically with `git push --atomic origin main vX.Y.Z`.
 4. A read-only GitHub Actions job validates and packs the package. A separate GitHub-owned job verifies the signature and signed digest before staging that exact archive through npm trusted publishing. That job also creates a GitHub artifact attestation for the archive and its checksum, and npm records provenance for the staged package.
 5. A final job creates the immutable GitHub release for the tag from the same verified archive, its

@@ -70,7 +70,6 @@ test(
     const env = {
       HOME: temporary,
       PI_CODING_AGENT_DIR: join(temporary, "agent"),
-      PI_PACKAGE_DIR: resolve(dirname(cli), "../.."),
       PI_OFFLINE: "1",
       PI_TELEMETRY: "0",
       PI_RESEARCHER_LIVE_API_KEY: token,
