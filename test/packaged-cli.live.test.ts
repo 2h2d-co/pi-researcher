@@ -7,9 +7,11 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { RpcClient } from "../node_modules/@earendil-works/pi-coding-agent/dist/modes/rpc/rpc-client.js";
 import { researchPrompt } from "../extensions/pi-researcher/index.ts";
+import manifest from "../package.json" with { type: "json" };
 import { archiveEntries, packageArchive } from "./package-archive.ts";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const piVersion = manifest.devDependencies["@earendil-works/pi-coding-agent"];
 const model = "gpt-5.6-luna";
 const topic = "the content of marker.txt in the working directory";
 const marker = "pi-researcher-live-marker";
@@ -42,7 +44,7 @@ const instructions =
   "the exact file content and nothing else.";
 
 test(
-  "packaged /research sends a live research request through Pi 1.0.1",
+  `packaged /research sends a live research request through Pi ${piVersion}`,
   {
     skip: process.env["PI_RESEARCHER_LIVE_TEST"] !== "1",
     timeout: 240_000,
@@ -78,7 +80,8 @@ test(
         env: { ...process.env, ...env },
         encoding: "utf8",
       }).trim(),
-      "1.0.1",
+      piVersion,
+      "Live validation requires the Pi version pinned as the development dependency.",
     );
     await mkdir(env.PI_CODING_AGENT_DIR);
     await writeFile(
@@ -170,7 +173,7 @@ test(
     assert.equal(answer, marker);
     assert.doesNotMatch(client.getStderr(), /Failed to load extension|requires Pi/);
     t.diagnostic(
-      `Pi 1.0.1 ${model}: packed extension, usage notice, live research request, and built-in read passed`,
+      `Pi ${piVersion} ${model}: packed extension, usage notice, live research request, and built-in read passed`,
     );
   },
 );
