@@ -31,9 +31,10 @@ The command sends a research-style prompt back into the session so Pi can invest
 
 ## Local development
 
-Run the complete non-writing validation:
+Install the locked dependencies and Git hooks, then run the complete non-writing validation:
 
 ```bash
+mise run init
 mise run check
 ```
 
