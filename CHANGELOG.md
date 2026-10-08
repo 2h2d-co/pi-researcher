@@ -6,8 +6,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- **Breaking:** Require Pi 1.0.1. The peer range is now `>=1.0.1 <1.1.0`, and the extension
-  refuses to load on an older Pi with a message to restart on Pi 1.0.1 or later. Pi 0.84 is no
+- **Breaking:** Require Pi 1.1.0. The peer range is now `>=1.1.0 <1.2.0`, and the extension
+  refuses to load on an older Pi with a message to restart on Pi 1.1.0 or later. Pi 0.84 is no
   longer supported. `/research` behavior is unchanged.
 - Adopt the shared 2h2d Oxlint policy and exact supported Oxlint and Oxfmt versions.
 
@@ -15,4 +15,4 @@ All notable changes to this project will be documented in this file.
 
 - Require npm releases to match a locally built SHA-256 recorded in an SSH-signed release commit before trusted publishing can stage the package.
 - Attest each release archive and its checksum with GitHub artifact attestations, and stage it on npm with provenance.
-- Updated the Pi development dependency and peer range to 0.84.x, including patched transitive HTTP and glob dependencies.
+- Update locked Pi dependencies, including patched transitive HTTP and glob dependencies.

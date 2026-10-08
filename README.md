@@ -2,8 +2,8 @@
 
 Minimal Pi package stub for research-oriented workflows.
 
-Requires Pi `>=1.0.1 <1.1.0`. Releases are validated against Pi 1.0.1. The
-extension refuses to load on a Pi older than 1.0.1, because Pi does not enforce
+Requires Pi `>=1.1.0 <1.2.0`. Releases are validated against Pi 1.1.0. The
+extension refuses to load on a Pi older than 1.1.0, because Pi does not enforce
 the package's peer range when it installs packages.
 
 **Pi's virtual models are not supported.** Releases are validated only with
