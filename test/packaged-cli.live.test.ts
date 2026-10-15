@@ -8,6 +8,7 @@ import { fileURLToPath } from "node:url";
 import { RpcClient } from "../node_modules/@earendil-works/pi-coding-agent/dist/modes/rpc/rpc-client.js";
 import { researchPrompt } from "../extensions/pi-researcher/index.ts";
 import manifest from "../package.json" with { type: "json" };
+import { describeFailure, errorLog } from "./error-log.ts";
 import { archiveEntries, packageArchive } from "./package-archive.ts";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -122,6 +123,7 @@ test(
       ],
     });
     t.after(async () => client.stop());
+    client.onEvent(errorLog(t).rpcEvent);
     await client.start();
 
     // An empty topic shows usage and does not start a model request.
@@ -164,7 +166,7 @@ test(
     assert.ok(assistant?.role === "assistant");
     assert.equal(assistant.provider, "openai-codex");
     assert.equal(assistant.model, model);
-    assert.equal(assistant.stopReason, "stop", assistant.errorMessage);
+    assert.equal(assistant.stopReason, "stop", describeFailure(assistant));
     const answer = assistant.content
       .map((block) => (block.type === "text" ? block.text : ""))
       .join("")
