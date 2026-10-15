@@ -93,7 +93,6 @@ test(
     await writeFile(
       join(env.PI_CODING_AGENT_DIR, "settings.json"),
       JSON.stringify({
-        transport: "sse",
         retry: { enabled: false, provider: { timeoutMs: 60_000, maxRetries: 0 } },
         compaction: { enabled: false },
       }),
