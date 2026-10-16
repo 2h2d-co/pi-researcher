@@ -8,8 +8,8 @@ import { fileURLToPath } from "node:url";
 import { RpcClient } from "../node_modules/@earendil-works/pi-coding-agent/dist/modes/rpc/rpc-client.js";
 import { researchPrompt } from "../extensions/pi-researcher/index.ts";
 import manifest from "../package.json" with { type: "json" };
-import { describeFailure, errorLog } from "./error-log.ts";
-import { archiveEntries, packageArchive } from "./package-archive.ts";
+import { describeFailure, errorLog } from "./support/error-log.ts";
+import { archiveEntries, packageArchive } from "./support/package-archive.ts";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const piVersion = manifest.devDependencies["@earendil-works/pi-coding-agent"];
