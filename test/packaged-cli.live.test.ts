@@ -13,7 +13,7 @@ import { archiveEntries, packageArchive } from "./support/package-archive.ts";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const piVersion = manifest.devDependencies["@earendil-works/pi-coding-agent"];
-const model = "gpt-5.6-luna";
+const model = "gpt-6-luna";
 const topic = "the content of marker.txt in the working directory";
 const marker = "pi-researcher-live-marker";
 type NotifyRequest = {

@@ -42,7 +42,7 @@ It runs the hk quality gate, the offline tests, and a package dry run.
 
 The live test packs the extension, loads the archive into the Pi CLI from
 `node_modules`, and sends a real `/research` request to `openai-codex`
-`gpt-5.6-luna`. It uses an isolated temporary Pi home and reads the bearer
+`gpt-6-luna`. It uses an isolated temporary Pi home and reads the bearer
 token from your existing `openai-codex` login through the repository Pi. Offline and live
 tests remove an inherited `PI_PACKAGE_DIR`, so Pi resolves its own package directory:
 
