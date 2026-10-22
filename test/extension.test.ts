@@ -9,9 +9,9 @@ import piResearcher, {
   type ResearcherApi,
 } from "../extensions/pi-researcher/index.ts";
 
-test("requires Pi 1.3.0 or later at load time", () => {
-  for (const version of ["1.3.0", "1.3.1", "1.4.0", "2.0.0"]) {
-    assert.equal(atLeastVersion(version, "1.3.0"), true, version);
+test("requires Pi 1.4.0 or later at load time", () => {
+  for (const version of ["1.4.0", "1.4.1", "1.5.0", "2.0.0"]) {
+    assert.equal(atLeastVersion(version, "1.4.0"), true, version);
   }
   for (const version of [
     "0.84.3",
@@ -19,19 +19,20 @@ test("requires Pi 1.3.0 or later at load time", () => {
     "1.0.4",
     "1.1.0",
     "1.2.0",
-    "1.2.9",
-    "1.3.0-rc.1",
+    "1.3.0",
+    "1.3.9",
+    "1.4.0-rc.1",
     "",
     "latest",
     undefined,
   ]) {
-    assert.equal(atLeastVersion(version, "1.3.0"), false, String(version));
+    assert.equal(atLeastVersion(version, "1.4.0"), false, String(version));
   }
   assert.doesNotThrow(() => requirePiVersion("pi-researcher", VERSION));
-  assert.throws(() => requirePiVersion("pi-researcher", "1.2.0"), {
+  assert.throws(() => requirePiVersion("pi-researcher", "1.3.0"), {
     message:
-      "pi-researcher requires Pi 1.3.0 or later, but the running Pi reports Pi 1.2.0. " +
-      "Exit Pi and start Pi 1.3.0 or later. /reload cannot upgrade the running runtime.",
+      "pi-researcher requires Pi 1.4.0 or later, but the running Pi reports Pi 1.3.0. " +
+      "Exit Pi and start Pi 1.4.0 or later. /reload cannot upgrade the running runtime.",
   });
 });
 
